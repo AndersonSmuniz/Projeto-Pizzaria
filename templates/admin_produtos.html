@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <nav class="navbar">
+      <img class="navbar_imglogo" src="{{ url_for('static', filename='image/La bella Pizzaria.png') }}" alt="logo" />
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href=/home>Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cardapio">Cardapio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/reservar">Reservar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/carrinho">Carrinho</a>
+          </li>
+          {% if type == '1' %}
+           <li class="navbar__item">
+            <a class="nav-link dropdown" >Administrativo</a>
+            <div class="dropdown_content adm">
+              <a class="dropdown-item" href="/administrativo/produtos">Produtos</a>
+              <a class="dropdown-item" href="/adminstrativo/usuario">Usuários</a>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <ul class="nav-options">
+        <li class="navbar__item">
+          <img class="navbar_imgperfil dropdown" src="{{ url_for('static', filename='image/ico_user.png') }}" alt="perfil" class="profile-image"
+            style="cursor: pointer" />
+          <div class="dropdown profile-dropdown">
+            <div class="dropdown_content perfil">
+              <a class="dropdown-item" href="/perfil">Perfil</a>
+              <a class="dropdown-item" href="/logout">Sair</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</body>
+</html>

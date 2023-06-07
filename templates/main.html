@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--font_awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!--css-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_main.css')}}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}" />
+  <title>La Bella's Pizzaria</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <img class="navbar_imglogo" src="{{ url_for('static', filename='image/La bella Pizzaria.png') }}" alt="logo" />
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href=/home>Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cardapio">Cardapio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/reservar">Reservar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/carrinho">Carrinho</a>
+          </li>
+          {% if type == '1' %}
+           <li class="navbar__item">
+            <a class="nav-link dropdown" >Administrativo</a>
+            <div class="dropdown_content adm">
+              <a class="dropdown-item" href="/administrativo/produtos">Produtos</a>
+              <a class="dropdown-item" href="/adminstrativo/usuario">Usuários</a>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <ul class="nav-options">
+        <li class="navbar__item">
+          <img class="navbar_imgperfil dropdown" src="{{ url_for('static', filename='image/ico_user.png') }}" alt="perfil" class="profile-image"
+            style="cursor: pointer" />
+          <div class="dropdown profile-dropdown">
+            <div class="dropdown_content perfil">
+              <a class="dropdown-item" href="/perfil">Perfil</a>
+              <a class="dropdown-item" href="/logout">Sair</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="main">
+    <section class="first_section">
+      <div class="div_title">
+        <h1 class="subtitle">Delicie-se com as melhores pizzas</h1>
+        <h2 class="title">La Bella's Pizzaria</h2>
+        <a class="scroll_link" href="#history">
+          <span style="position: relative">Sobre Nós</span>
+        </a>
+      </div>
+    </section>
+    <section class="secund_section">
+      <div class="groupbox service">
+        <img class="group_img" src="{{ url_for('static', filename='image/gaçom.png') }}" alt="garçom" />
+        <h3>SERVIÇO PROFICIONAL</h3>
+        <p>
+          Experiência de serviço profissional que supera todas as
+          expectativas.
+        </p>
+        <span class="top"></span>
+        <span class="right"></span>
+        <span class="bottom"></span>
+        <span class="left"></span>
+      </div>
+      <div class="groupbox cook">
+        <img class="group_img" src="{{ url_for('static', filename='image/cozinheiro.png') }}" alt="cozinheiro" />
+        <h3>MELHORES SABORES</h3>
+        <p>
+          Descubra os melhores sabores de pizza, uma explosão gastronômica.
+        </p>
+        <span class="top"></span>
+        <span class="right"></span>
+        <span class="bottom"></span>
+        <span class="left"></span>
+      </div>
+      <div class="groupbox varietionPizzas">
+        <img class="group_img" src="{{ url_for('static', filename='image/pizzasas.png') }}" alt="pizza" />
+        <h3>VELOCIDADE NA ENTREGA</h3>
+        <p>Entrega rápida: saboreie sua pizza fresquinha em minutos.</p>
+        <span class="top"></span>
+        <span class="right"></span>
+        <span class="bottom"></span>
+        <span class="left"></span>
+      </div>
+    </section>
+
+    <section class="third_section">
+      <div class="title_publicity">
+        <h1>Mais pedidas</h1>
+      </div>
+      <div class="arrow">
+        <a class="arrow-left" onclick="slideLeft()"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+        <a class="arrow-right" onclick="slideRight()"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+      <div class="container">
+
+        {% for product in products %}
+        <div class="card">
+          <div class="image">
+            <img src="{{ product['image'] }}">
+          </div>
+          <div class="content">
+            <h3>{{ product['name'] }}</h3>
+            <p>{{ product['description'] }}</p>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </section>
+
+    <section class="fourth_section">
+      <!--card1-->
+      <div class="container_opinions">
+        <h1>Nosso Depoimentos</h1>
+        <p>Experiencias de nossos clientes</p>
+        <div class="cards_opinions">
+          <div class="card_opinions-items">
+            <img src="{{ url_for('static', filename='image/cliente1.jpg') }}" alt="userImagem">
+            <h4>Guilherme Gomes</h4>
+            <p>"Eu simplesmente amo a pizzaria Bella Napoli!
+              Sempre que sinto aquele desejo por uma pizza deliciosa
+              e autêntica, é para lá que eu vou."</p>
+
+            <div class="star">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            </div>
+          </div>
+          <!--card1.and-->
+          <!--card2-->
+          <div class="card_opinions-items">
+            <img src="{{ url_for('static', filename='image/cliente1.jpg') }}" alt="userImagem">
+            <h4>Guilherme Gomes</h4>
+            <p>"Eu simplesmente amo a pizzaria Bella Napoli!
+              Sempre que sinto aquele desejo por uma pizza deliciosa
+              e autêntica, é para lá que eu vou."</p>
+
+            <div class="star">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            </div>
+          </div>
+          <!--card2-.and-->
+          <!--card3-->
+          <div class="card_opinions-items">
+            <img src="{{ url_for('static', filename='image/cliente1.jpg') }}" alt="userImagem">
+            <h4>Guilherme Gomes</h4>
+            <p>"Eu simplesmente amo a pizzaria Bella Napoli!
+              Sempre que sinto aquele desejo por uma pizza deliciosa
+              e autêntica, é para lá que eu vou."</p>
+
+            <div class="star">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            </div>
+          </div>
+          <!--card3.and-->
+        </div>
+      </div>
+    </section>
+    <section class="fifth_section" id="history">
+      <div class="blur"></div>
+      <div class="history">
+        <h1> Nossa Historia</h1>
+        <p>A Bella Napoli, uma pizzaria fundada por Carlos, tornou-se um marco
+          na cidade. Com ingredientes frescos e sabores irresistíveis, a pizzaria
+          conquistou uma clientela fiel. A massa fina e crocante, combinada com
+          um atendimento acolhedor, fez da Bella Napoli um local querido por todos.
+          Com o tempo, Carlos expandiu o negócio com um serviço de entrega rápido
+          e eficiente, levando a delícia das pizzas até a porta dos clientes.
+          A história da Bella Napoli é marcada pelo compromisso com a qualidade
+          e o prazer de proporcionar uma experiência gastronômica memorável.</p>
+      </div>
+      <div class="pizzeria">
+        <img src="{{ url_for('static', filename='image/local (1).png') }}" alt="Pizzaria">
+      </div>
+    </section>
+    <footer>
+        <div class="footer_content">
+          <div id="footer_contents">
+            <h1><img src="{{ url_for('static', filename='image/La bella Pizzaria.png') }}" alt=""></h1>
+            <p>Segue lá</p>
+            <div id="footer_social_media">
+              <a href="#" class="footer_link" id="instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="#" class="footer_link" id="facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="#" class="footer_link" id="whatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <ul class="footer_list">
+              <li>
+                <h3>Blog</h3>
+              </li>
+              <li>
+                <a href="" class="footer_link">Tech</a>
+              </li>
+              <li>
+                <a href="" class="footer_link">Tech</a>
+              </li>
+              <li>
+                <a href="" class="footer_link">Tech</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul class="footer_list">
+              <li>
+                <h3>Products</h3>
+              </li>
+              <li>
+                <a href="" class="footer_link">App</a>
+              </li>
+              <li>
+                <a href="" class="footer_link">Adventures</a>
+              </li>
+              <li>
+                <a href="" class="footer_link">Music</a>
+              </li>
+            </ul>
+          </div>
+          <div id="footer_subscribe">
+            <h3>Contatos</h3>
+            <p>
+              anderson.muniz398@gmail.com
+            </p>
+            <p>
+              (99)9999-9999
+            </p>
+            <p>
+              (99)9999-9999
+            </p>
+          </div>
+        </div>
+    </footer>
+  </main>
+  <script src="{{ url_for('static', filename='js/script_main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script_header.js') }}"></script>
+</body>
+
+</html>
