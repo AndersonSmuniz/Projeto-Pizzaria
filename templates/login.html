@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>SoPizza</title>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1 id="login-title">La Bella's</h1>
+        <h2 id="">Pizzaria</h2>
+        <form action="#" method="post">
+            <div class="nomeUser">
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <img src="{{ url_for('static', filename='image/Vector.png') }}" alt="user" id="vt">
+            </div>
+            <div class="passwordUser">
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <img src="{{ url_for('static', filename='image/cadeado.png') }}" alt="cadeado" id="cadeado">
+                
+            </div>
+            <button type="submit"><span>Entrar</span></button>
+        </form>
+        <div class = 'logins'>
+            <img src="{{ url_for('static', filename='image/grup google.png') }}" alt="google" id="google">
+            <img src="{{ url_for('static', filename='image/Facbook.png') }}" alt="facebook" id="face">
+            <img src="{{ url_for('static', filename='image/Group.png') }}" alt="apple" id="apple">
+        
+        </div>
+        <p>Não tem uma conta? <a href="cadastro.html">Criar uma conta</a></p>
+    </div>
+
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='image/pizza3d.png') }}" alt="Imagem" id="imgpizza">
+    </div>
+    
+</body>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</html>

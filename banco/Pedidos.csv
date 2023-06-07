@@ -1,0 +1,2 @@
+user_id, product_id, item, amount, observation, specification, status
+1,13,pizza,1,"Sem cebola, e com bastante catupiry",M,False

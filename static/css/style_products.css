@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital@1&display=swap');
+
+:root{
+  --clr-main: rgb(170, 100, 42);
+  --clr-white: #ececec;
+  --clr-gray: #e2e2e2;
+  --clr-red:#961818;
+  
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
+
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  background-color: rgb(170, 100, 42);
+}
+
+aside{
+  color: var(--clr-white);
+  position: sticky;
+  top: 0;
+  width: 10rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+}
+ul{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+}
+.page_title{
+  text-align: left;
+  padding-left: 1rem;
+  padding-top: 2rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.menu_items{
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+   font-weight: 600;
+   padding: 0;
+   font-size: .85rem;
+   align-content: space-around;
+   flex-wrap: wrap;
+   align-items: stretch;
+}
+.category.active{
+  background-color: #e2e2e2;
+  color: rgb(255, 60, 0);
+  width: 100%;
+}
+
+.category{
+  position: relative;
+  text-decoration: none;
+  background-color: transparent;
+  left: 10px;
+  border: 0;
+  border-radius: 15px;
+  padding: 1rem 5px;
+  font-size: 17px;
+  color: white;
+  cursor: pointer;
+}
+
+.and{
+  color: gray;
+  font-size: 0.75rem;
+}
+
+main{
+  background-color: #e7e7e7;
+  margin: 1rem;
+  margin-left: 0;
+  border-radius: 20px;
+  padding: 3rem;
+}
+
+main h2{
+  font-size: 3rem;
+  color: tomato;
+  margin-bottom: 2rem;
+}
+
+.products{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 4rem 2rem;
+}
+
+.product_image{
+  width: 210px;
+  height: 150px;
+  border-radius: 1rem;
+}
+.product_info{
+  background: #af231e;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  height: 140px;
+  width: 210px;
+  color: white;
+  padding: .5rem;
+  border-radius: 0 0 1rem 1rem;
+  margin-top: -1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+
+}
+
+.product_name{
+  text-align: center;
+  padding-bottom: .5rem;
+}
+
+.product_ask{
+  background-color: orangered;
+  color: white;
+  font-size: 15px;
+  padding: 1.3rem 1.5rem;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 2rem 0 2rem 2rem;
+  display: flex;
+  position: absolute;
+  left: 8rem;
+  top: 115px;
+}
+.product_ask:hover{
+  background-color: rgb(255, 60, 0);
+  border: 1px solid rgb(255, 60, 0);
+  font-size: 17px;
+}
+
