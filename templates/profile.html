@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--font_awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!--css-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}" />
+  <title>Perfil</title>
+</head>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-header h1 {
+            color: #333;
+        }
+
+        .profile-details {
+            margin-bottom: 20px;
+        }
+
+        .profile-details p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .profile-details label {
+            font-weight: bold;
+        }
+    </style>
+<body>
+  <header>
+    <nav class="navbar">
+      <img class="navbar_imglogo" src="{{ url_for('static', filename='image/La bella Pizzaria.png') }}" alt="logo" />
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href=/home>Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cardapio">Cardapio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/reservar">Reservar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/carrinho">Carrinho</a>
+          </li>
+          {% if type == '1' %}
+           <li class="navbar__item">
+            <a class="nav-link dropdown" >Administrativo</a>
+            <div class="dropdown_content adm">
+              <a class="dropdown-item" href="/administrativo/produtos">Produtos</a>
+              <a class="dropdown-item" href="/adminstrativo/usuario">Usuários</a>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <ul class="nav-options">
+        <li class="navbar__item">
+          <img class="navbar_imgperfil dropdown" src="{{ url_for('static', filename='image/ico_user.png') }}" alt="perfil" class="profile-image"
+            style="cursor: pointer" />
+          <div class="dropdown profile-dropdown">
+            <div class="dropdown_content perfil">
+              <a class="dropdown-item" href="/perfil">Perfil</a>
+              <a class="dropdown-item" href="/logout">Sair</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Perfil</h1>
+        </div>
+
+        <div class="profile-details">
+            <p><label>ID:</label> {{ info.id }}</p>
+            <p><label>Nome:</label> {{ info.username }}</p>
+            <p><label>Tipo:</label> {{ info.type }}</p>
+            <p><label>Endereço:</label> {{ info.address }}</p>
+        </div>
+
+    </div>
+
+  <script src="{{ url_for('static', filename='js/script_header.js') }}"></script>
+</body>
+</html>

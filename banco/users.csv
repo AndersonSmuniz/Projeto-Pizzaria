@@ -1,3 +1,4 @@
-id,nome,password,tipe,address
+id,nome,password,type,address
 1,and,and,1,rua 1
 2,user,user,0,rua 2
+3,anderson,123,0,Rua Otilia Peixoto

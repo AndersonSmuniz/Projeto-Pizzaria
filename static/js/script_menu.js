@@ -43,7 +43,7 @@ const buyButton = document.querySelector('.buy');
 buyButton.addEventListener('click', function() {
   addToCart();
 });
-
+// Animação do botão "Comprar"
 buyButton.addEventListener('mouseover', function() {
   const tooltip = document.createElement('span');
   tooltip.textContent = 'Colocar no carrinho';
@@ -52,6 +52,7 @@ buyButton.addEventListener('mouseover', function() {
 });
 
 // Evento de sair o mouse do botão "Comprar"
+
 buyButton.addEventListener('mouseout', function() {
   const tooltip = buyButton.querySelector('.tooltip');
   if (tooltip) {
@@ -71,6 +72,6 @@ function addToCart() {
 
 // Evento de clique no carrinho para redirecionar para a página do carrinho
 cartButton.addEventListener('click', function() {
-  window.location.href = '/carrinho'; // Insira o link da página do carrinho aqui
+  window.location.href = '/carrinho';
 });
 

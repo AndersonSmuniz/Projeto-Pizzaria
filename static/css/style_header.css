@@ -85,7 +85,7 @@
       padding: 15px 20px;
       border-radius: 0px;
       font-size: 14px;
-      
+      cursor: pointer;
       
     }
     .nav-link:hover{

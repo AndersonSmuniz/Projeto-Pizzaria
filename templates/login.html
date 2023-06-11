@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_cadastro.css') }}">
     <title>SoPizza</title>
 </head>
 <body>
@@ -20,23 +21,44 @@
             <div class="passwordUser">
                 <input type="password" id="password" name="password" placeholder="Senha" required>
                 <img src="{{ url_for('static', filename='image/cadeado.png') }}" alt="cadeado" id="cadeado">
-                
+
             </div>
-            <button type="submit"><span>Entrar</span></button>
+            <button type="submit" id="login"><span>Entrar</span></button>
         </form>
         <div class = 'logins'>
             <img src="{{ url_for('static', filename='image/grup google.png') }}" alt="google" id="google">
             <img src="{{ url_for('static', filename='image/Facbook.png') }}" alt="facebook" id="face">
             <img src="{{ url_for('static', filename='image/Group.png') }}" alt="apple" id="apple">
-        
+
         </div>
-        <p>Não tem uma conta? <a href="cadastro.html">Criar uma conta</a></p>
+        <p>Não tem uma conta? <a id="create-account-link">Criar uma conta</a></p>
     </div>
 
+    <div class="register-container hidden">
+        <h1 id="register-title">Registrar-se</h1>
+        <form action="#" method="post">
+            <div class="nomeUser">
+                <input class="register_input" type="text" id="username_register" name="username" placeholder="Usuário" required>
+            </div>
+
+            <label for="address"></label>
+            <input class="register_input" type="text" id="address" placeholder="Endereço" required>
+
+            <div class="passwordUser">
+                <input class="register_input" type="password" id="password_register" name="password" placeholder="Senha" required>
+            </div>
+            <div class="passwordUser">
+                <input class="register_input" type="password" id="confirm_register" name="password" placeholder="Confirmar senha" required>
+            </div>
+
+            <button type="submit" id="register"> <span>Registrar-se</span></button>
+        </form>
+        <p>Já tem uma conta? <a id="login_form">Login</a></p>
+    </div>
     <div class="image-container">
         <img src="{{ url_for('static', filename='image/pizza3d.png') }}" alt="Imagem" id="imgpizza">
     </div>
-    
+
 </body>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script_cadastro.js')}}"></script>
 </html>

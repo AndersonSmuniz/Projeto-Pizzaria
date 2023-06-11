@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--font_awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!--css-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_admProduct.css') }}">
+
+    <script type="text/javascript">
+            const products = JSON.parse('{{ products|tojson|safe }}');
+            console.log(products);
+
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script_admProduct.js') }}"></script>
+
+  <title>Administrativo</title>
 </head>
 <body>
-<header>
+  <header>
     <nav class="navbar">
       <img class="navbar_imglogo" src="{{ url_for('static', filename='image/La bella Pizzaria.png') }}" alt="logo" />
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -47,5 +65,61 @@
       </ul>
     </nav>
   </header>
+
+  <header class="header_adm">
+  <div class="header-container">
+    <h1>Gerenciar Pizzas</h1>
+    <div class="add-product">
+      <i class="fa fa-plus-circle" aria-hidden="true"></i>
+      <span>Adicionar Produto</span>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="Buscar pelo nome">
+      <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="product-list"></div>
+
+<div class="modal-overlay">
+  <div class="modal">
+    <h2>Editar Pizza</h2>
+    <form id="edit-pizza-form">
+      <label for="edit-pizza-name">Nome:</label>
+      <input type="text" id="edit-pizza-name" name="name" required>
+
+      <label for="edit-pizza-description">Descrição:</label>
+      <input type="text" id="edit-pizza-description" name="description" required>
+
+      <label for="edit-pizza-price-p">Preço (P):</label>
+      <input type="number" id="edit-pizza-price-p" name="price_p" required>
+
+      <label for="edit-pizza-price-m">Preço (M):</label>
+      <input type="number" id="edit-pizza-price-m" name="price_m" required>
+
+      <label for="edit-pizza-price-g">Preço (G):</label>
+      <input type="number" id="edit-pizza-price-g" name="price_g" required>
+
+      <label for="edit-pizza-image">Imagem:</label>
+      <input type="text" id="edit-pizza-image" name="image" required>
+
+      <div class="modal-buttons">
+        <button type="button" class="cancel-btn">Cancelar</button>
+        <button type="submit" class="save-btn">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+
+  <script type="text/javascript">
+    var backendProducts = {{ products|tojson }};
+    console.log(backendProducts);
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script_admProduct.js') }}"></script>
+  <script src="{{url_for('static', filename='js/script_header.js')}}"></script>
 </body>
+
 </html>

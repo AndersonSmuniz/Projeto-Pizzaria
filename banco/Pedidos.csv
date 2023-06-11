@@ -1,2 +1,5 @@
-user_id, product_id, item, amount, observation, specification, status
-1,13,pizza,1,"Sem cebola, e com bastante catupiry",M,False
+id,user_id,product_id,item,amount,observation,specification,status
+1,2,6,pizza,1,,G,True
+2,2,6,pizza,30,carro,G,True
+3,2,7,pizza,5,22,G,True
+4,1,6,pizza,1,,M,True

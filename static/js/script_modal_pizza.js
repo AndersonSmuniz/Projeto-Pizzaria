@@ -40,8 +40,15 @@ function openModal(product) {
 
 function closeModal() {
   const modal = document.getElementById("editModal");
-  document.getElementById("quantity").value = "1";
+  const quantityInput = document.getElementById("quantity");
+  const quantityValue = quantityInput.value; // Obter o valor atual do campo
+
   modal.style.display = "none";
+
+  setTimeout(() => {
+    // Limpar o campo tempo (100ms)
+    quantityInput.value = 1;
+  }, 100);
 }
 
 function initModal() {
@@ -72,9 +79,6 @@ productForm.addEventListener('submit', function(event) {
 
   request.open('POST', '/cardapio');
   request.send(formData);
-
-  console.log("Valor do campo action:", actionInput.value);
-  console.log("Valor do campo observation:", observationInput.value);
 
   closeModal();
 });

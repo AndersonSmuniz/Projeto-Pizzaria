@@ -11,11 +11,12 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!--css-->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_requests.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_carrinho.css') }}">
+
   <title>Carrinho</title>
 </head>
 <body>
-  <header>
+    <header>
     <nav class="navbar">
       <img class="navbar_imglogo" src="{{ url_for('static', filename='image/La bella Pizzaria.png') }}" alt="logo" />
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -57,129 +58,102 @@
       </ul>
     </nav>
   </header>
-  <main>
-    <h1 class="page_title">Pedidos</h1>
-    <div class="container_main">
-      <div class="void_cart"><i class="fa fa-frown-o" aria-hidden="true"></i>
-        <p>Carrinho vazio.</p>
-      </div>
-      <div class="products_cart">
-        <div class="product_cart">
-          <img src="/imagens/pizzafundo.png" alt="">
-          <div class="product_title">
-            <small>Pizza Margherita</small>
-            <h3>Pizza de Queijo e Manjericão</h3>
-          </div>
-          <div class="cart_product_amount">
-            <small>Quantidade</small>
-            <p>1</p>
-          </div>
-          <div class="cart_product_value">
-            <small>Preço</small>
-            <p>R$ 25.00</p>
-          </div>
-          <div class="cat_product_subtotal">
-            <small>Subtotal</small>
-            <p>R$ 25.00</p>
-          </div>
-          <div class="cart_buttons">
-            <button class="cart_product_edit" onclick="openEditModal()"><i class="fa fa-pencil"
-                aria-hidden="true"></i></button>
-            <button class="cart_product_delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-          </div>
-        </div>
 
-        <div class="product_cart">
-          <img src="/imagens/pizzavegana.png" alt="">
-          <div class="product_title">
-            <small>Pizza Vegana</small>
-            <h3>Com Legumes Frescos</h3>
-          </div>
-          <div class="cart_product_amount">
-            <small>Quantidade</small>
-            <p>2</p>
-          </div>
-          <div class="cart_product_value">
-            <small>Preço</small>
-            <p>R$ 30.00</p>
-          </div>
-          <div class="cat_product_subtotal">
-            <small>Subtotal</small>
-            <p>R$ 60.00</p>
-          </div>
-          <div class="cart_buttons">
-            <button class="cart_product_edit" onclick="openEditModal()"><i class="fa fa-pencil"
-                aria-hidden="true"></i></button>
-            <button class="cart_product_delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-          </div>
+ <main>
+  <h1 class="page_title">Pedidos</h1>
+  {% if user_orders %}
+  {% set total = 0 %}
+  <div class="container_main">
+    <div class="products_cart">
+      {% for order in user_orders %}
+      {% set total = total + order['subtotal']%}
+      <div class="product_cart">
+        <img src="{{ order['image'] }}" alt="">
+        <div class="product_title">
+          <small>{{ order['name'] }}</small>
+          <h3>{{ order['specification'] }}</h3>
+        </div>
+        <div class="cart_product_amount">
+          <small>Quantidade</small>
+          <p>{{ order['amount'] }}</p>
+        </div>
+        <div class="cart_product_value">
+          <small>Preço</small>
+          <p>{{ order['prices'][0][order['specification']]}}</p>
+        </div>
+        <div class="cat_product_subtotal">
+          <small>Subtotal</small>
+          <p>{{ order['subtotal'] }}</p>
+        </div>
+        <div class="cart_buttons">
+          <button class="cart_product_delete" onclick="deletePedido('{{ order['id'] }}')" ><i class="fa fa-trash-o" aria-hidden="true"></i></button>
         </div>
       </div>
-      <div class="cart_actions">
-        <div class="actions_total">
-          <p>Total:</p>
-          <p id="total">R$ 85.00</p>
-          <button class="cart_action_buy">Finalizar Pedido</button>
-        </div>
+      {% endfor %}
+    </div>
+    <div class="cart_actions">
+      <div class="actions_total">
+        <p>Total:</p>
+        <p id="total"></p>
+        <button class="cart_action_buy btn-finalizar">Finalizar Pedido</button>
       </div>
     </div>
+  </div>
+  {% else %}
+  <div class="container_main">
+    <div class="void_cart">
+      <i class="fa fa-frown-o" aria-hidden="true"></i>
+      <p>Carrinho vazio.</p>
+      <a href="/cardapio" class="button">Ver cardápio</a>
+    </div>
+  </div>
+  {% endif %}
+</main>
 
-    <!--(Modal) -->
-    <div id="editModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="pizza-details">
-          <img src="/imagens/pizzafundo.png" alt="Pizza">
-          <div class="pizza-info">
-            <h2>Pizza Margherita</h2>
-            <p class="pizza_description">Pizza com queijo, tomate e manjericão.</p>
-            <p class="price">Preço: R$ <span id="pizza-price">25.00</span></p>
-          </div>
+<!-- Elemento HTML oculto para armazenar o user_id -->
+<input type="hidden" id="user-id" value="{{ user_id }}">
+
+<!-- Modal de finalização -->
+<div id="modal-finalizar" class="container d-flex justify-content-center mt-5">
+  <div class="card">
+    <div>
+      <h3 class="modal-title">Finalizar Pedido</h3>
+      <div class="payment-method">
+        <label class="radio-container">
+          <input type="radio" name="payment" value="pix">
+          <span class="checkmark"></span>
+          Pix
+        </label>
+        <label class="radio-container">
+          <input type="radio" name="payment" value="cartao">
+          <span class="checkmark"></span>
+          Cartão
+        </label>
+        <label class="radio-container">
+          <input type="radio" name="payment" value="dinheiro">
+          <span class="checkmark"></span>
+          Dinheiro
+        </label>
+        <div class="money-options">
+          <label for="troco-valor">Troco para:</label>
+          <input type="number" id="troco-valor" name="troco-valor">
         </div>
-        <form>
-          <div class="quantity-container">
-            <label quantity-container for="quantity">Quantidade:</label>
-            <input type="number" id="quantity" name="quantity" min="1" value="1">
-          </div>
-          <div class="size-options">
-            <a type="button" class="size-btn active" data-price="25.00">P</a>
-            <a type="button" class="size-btn" data-price="30.00">M</a>
-            <a type="button" class="size-btn" data-price="35.00">G</a>
-          </div>
-          <div class="observation_option">
-            <label for="observation">Observação:</label>
-            <textarea id="observation" name="observation" placeholder="ex.: Sem cebola"></textarea>
-          </div>
-          <button type="submit">Salvar</button>
-        </form>
       </div>
     </div>
-    
-    <!-- Modal finalização -->
-    ds<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Finalizar Pedido</h2>
-    <div class="payment-option">
-      <label for="payment-type">Tipo de Pagamento:</label>
-      <select id="payment-type">
-        <option value="dinheiro">Dinheiro</option>
-        <option value="cartao">Cartão</option>
-        <option value="pix">PIX</option>
-      </select>
+    <div class="modal-actions">
+      <div>
+        <button class="btn btn-secondary" onclick="fecharModalFinalizar()">Cancelar</button>
+      </div>
+      <div>
+        <button class="btn btn-primary" onclick="finalizarPedido()">Finalizar</button>
+      </div>
     </div>
-    <div id="troco-option" class="troco-option">
-      <label for="troco-amount">Valor do Troco:</label>
-      <input type="number" id="troco-amount" name="troco-amount" min="0" step="0.01">
-    </div>
-    <div class="address-option">
-      <label for="address">Endereço de Entrega:</label>
-      <textarea id="address" name="address"></textarea>
-    </div>
-    <button id="confirm-order" class="confirm-order">Confirmar Pedido</button>
   </div>
 </div>
-  </main>
-  <script src="{{ url_for('static', filename='js/script_pedidos.js') }}"></script>
+
+
+  <script src="{{ url_for('static', filename='js/modal_finalizar.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script_carrinho.js') }}"></script>
   <script src="{{url_for('static', filename='js/script_header.js')}}"></script>
 </body>
 
