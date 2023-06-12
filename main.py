@@ -223,19 +223,22 @@ def admin_pro():
 @app.route('/adm/produtos/atualizar-adicionar', methods=['POST'])
 def update_add_product():
     data = request.get_json()
+    id = data['id']
     name = data['name']
     description = data['description']
     price_p = data['price_p']
     price_m = data['price_m']
     price_g = data['price_g']
     image = data['image']
+    print(data)
     with open('banco/produtoPizzas.csv', 'r+', encoding='utf-8', newline='') as file:
         reader = csv.DictReader(file)
         products = list(reader)
 
         product_found = False
         for product in products:
-            if product['name'] == name:
+            if product['id'] == id:
+                product['name'] = name
                 product['price'] = '[{"P": '+price_p+',"M": '+price_m+', "G": '+price_g+'}]'
                 product['description'] = description
                 product['image'] = image
@@ -301,9 +304,11 @@ def perfil():
     else:
         return redirect(url_for('login'))
 
+
 @app.errorhandler(404)
-def error():
+def error(e):
     return render_template('main.html'), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)

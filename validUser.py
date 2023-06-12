@@ -7,4 +7,4 @@ class userObject():
         self.password = user[2]
         self.tipe = user[3]
         self.address = user[4]
-        print(self.name)
+

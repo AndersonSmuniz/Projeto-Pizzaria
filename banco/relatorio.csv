@@ -1,3 +1,4 @@
 product_id,user_id,product_id,item,amount,observation,specification,status,tipo_pagamento,troco
 2,2,6,pizza,30,carro,G,True,pix,
 3,2,7,pizza,5,22,G,True,pix,
+6,4,12,pizza,5,sem cebola,M,True,dinheiro,200

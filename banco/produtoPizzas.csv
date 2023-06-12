@@ -19,4 +19,5 @@ id,name,price,description,image,item
 18,Pizza Calabresa com Cebola,"[{""P"": 28, ""M"": 33, ""G"": 38}]","Pizza com calabresa, cebola fatiada e queijo derretido",https://images.unsplash.com/photo-1618213837799-25d5552820d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=842&q=80,pizza
 19,Pizza Frango com Milho,"[{""P"": 30, ""M"": 35, ""G"": 40}]",Pizza de frango desfiado com milho e catupiry cremoso,https://images.pexels.com/photos/3682837/pexels-photo-3682837.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,pizza
 20,Pizza Margherita com Pesto,"[{""P"": 29, ""M"": 34, ""G"": 39}]",Pizza Margherita com molho pesto e queijo derretido,https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1,pizza
-21,TESTE,"[{""P"": 1,""M"": 2, ""G"": 3}]",TESTE,https://i.etsystatic.com/28209002/r/il/37929c/3002416909/il_1140xN.3002416909_37z2.jpg,pizza
+21,teste,"[{""P"": 10,""M"": 2, ""G"": 3}]",TESTE,https://i.etsystatic.com/28209002/r/il/37929c/3002416909/il_1140xN.3002416909_37z2.jpg,pizza
+22,Pizza bart com raiva da mina,"[{""P"": 50,""M"": 60, ""G"": 70}]",yang1001,https://th.bing.com/th/id/OIP.8YWKcXXTLdYCsA_cIawuPAAAAA?pid=ImgDet&rs=1,pizza
