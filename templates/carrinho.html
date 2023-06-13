@@ -58,7 +58,6 @@
       </ul>
     </nav>
   </header>
-
  <main>
   <h1 class="page_title">Pedidos</h1>
   {% if user_orders %}
@@ -109,8 +108,9 @@
   </div>
   {% endif %}
 </main>
-
-<!-- Elemento HTML oculto para armazenar o user_id -->
+  <div id="modal-success" class="success-message">
+   <i class="fa fa-check" aria-hidden="true"></i>
+  </div>
 <input type="hidden" id="user-id" value="{{ user_id }}">
 
 <!-- Modal de finalização -->
@@ -125,7 +125,7 @@
           Pix
         </label>
         <label class="radio-container">
-          <input type="radio" name="payment" value="cartao">
+          <input type="radio" name="payment" value="cartao" checked>
           <span class="checkmark"></span>
           Cartão
         </label>

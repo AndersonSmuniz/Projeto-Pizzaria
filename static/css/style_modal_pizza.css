@@ -1,4 +1,7 @@
-* {
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&family=Wix+Madefor+Display:wght@500&display=swap");
+
+*{
+  font-family: "Baloo Bhaina 2", Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
 }
 

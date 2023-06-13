@@ -2,3 +2,8 @@ product_id,user_id,product_id,item,amount,observation,specification,status,tipo_
 2,2,6,pizza,30,carro,G,True,pix,
 3,2,7,pizza,5,22,G,True,pix,
 6,4,12,pizza,5,sem cebola,M,True,dinheiro,200
+6,1,1,pizza,1,,P,True,dinheiro,0
+7,1,2,pizza,1,,M,True,pix,0
+8,1,1,pizza,1,,M,True,cartao,0
+9,1,1,pizza,1,,M,True,cartao,0
+10,1,1,pizza,1,,M,True,cartao,0

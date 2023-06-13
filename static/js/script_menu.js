@@ -66,7 +66,6 @@ function addToCart() {
   const count = parseInt(cartCount.textContent);
   cartCount.textContent = count + 1;
 
-  // Exibir o carrinho
   cartButton.classList.add('show-cart');
 }
 

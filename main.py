@@ -58,7 +58,7 @@ def home():
     if 'id' in session:
         type = logged.User(session['id'])
         file = '/banco/produtoPizzas.csv'
-        num_products = 7
+        num_products = 10
         products = random_pizza(file, num_products)
         return render_template('main.html', id=session['id'], type=type.type, products=products)
     else:
@@ -157,13 +157,11 @@ def finalizar_compra():
     tipo_pagamento = request.form.get('tipo_pagamento')
     troco = request.form.get('troco')
 
-    print(user_id, tipo_pagamento, troco)
     pedidos_modificados = []
 
     with open('banco/Pedidos.csv', 'r', encoding='utf-8') as file:
         pedidos_file = csv.DictReader(file)
         pedidos = list(pedidos_file)
-        print(pedidos)
         for i, row in enumerate(pedidos):
             if row['user_id'] == user_id and row['status'] == 'False':
                 # Atualiza o status do pedido para 'True'
@@ -182,8 +180,10 @@ def finalizar_compra():
         writer = csv.writer(file)
         for pedido in pedidos_modificados:
             pedido['tipo_pagamento'] = tipo_pagamento
-            pedido['troco'] = troco
-            print(pedido)
+            if str(troco) == "NaN":
+                pedido['troco'] = 0
+            else:
+                pedido['troco'] = troco
             writer.writerow(pedido.values())
 
     return jsonify({'success': True, 'message': 'Pedido finalizado com sucesso.'})
@@ -256,7 +256,6 @@ def update_add_product():
         writer = csv.DictWriter(file, fieldnames=reader.fieldnames)
         writer.writeheader()
         writer.writerows(products)
-        print("att",products)
     return jsonify({'success': True})
 
 

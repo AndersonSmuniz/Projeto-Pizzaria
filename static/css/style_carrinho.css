@@ -1,10 +1,8 @@
-/* Estilos gerais */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&family=Wix+Madefor+Display:wght@500&display=swap");
 
+*{
+    font-family: "Baloo Bhaina 2", Tahoma, Geneva, Verdana, sans-serif;
+}
 /* Container principal */
 .container_main {
   max-width: 800px;
@@ -180,6 +178,18 @@ body {
   margin: 0;
 }
 
+.modal-error {
+  border: 2px solid red;
+}
+
+.error-message {
+  background-color: red;
+  text-align: center;
+  padding: 10px;
+  border-radius: 20px;
+  color: white;
+  margin-top: 10px;
+}
 
 .void_cart {
   text-align: center;
@@ -337,4 +347,27 @@ body {
   background-color: green;
   color: #fff;
 }
+}
+.success-message{
+    color: white;
+}
+.success-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: green;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: none;
+  width: 60px;
+  height: 55px;
+}
+.success-message.show {
+  display: block;
 }

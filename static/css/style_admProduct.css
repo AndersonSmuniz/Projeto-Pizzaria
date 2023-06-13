@@ -1,8 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&family=Wix+Madefor+Display:wght@500&display=swap");
+
+*{
+    font-family: "Baloo Bhaina 2", Tahoma, Geneva, Verdana, sans-serif;
+}
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-   overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .header_adm {

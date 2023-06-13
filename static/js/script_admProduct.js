@@ -116,7 +116,6 @@ function openEditModal(id) {
 function deleteProduct(id) {
   // Confirmação do usuário para excluir o produto
   if (confirm('Tem certeza de que deseja excluir este produto?')) {
-    // Envia a solicitação de exclusão para a rota correspondente
     fetch('/api/produtos/excluir', {
       method: 'POST',
       body: new URLSearchParams({ id }),
@@ -124,7 +123,6 @@ function deleteProduct(id) {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          // Atualiza a página após a exclusão bem-sucedida
           location.reload();
         } else {
           console.error('Erro ao excluir o produto:', data.error);

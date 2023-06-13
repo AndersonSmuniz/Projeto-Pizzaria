@@ -1,6 +1,7 @@
 document.querySelector('.btn-finalizar').addEventListener('click', function() {
   abrirModalFinalizar();
 });
+
 // Função para abrir o modal de finalização
 function abrirModalFinalizar() {
   const modalFinalizar = document.getElementById("modal-finalizar");
@@ -16,28 +17,54 @@ function fecharModalFinalizar() {
 // Função para finalizar o pedido
 function finalizarPedido() {
   const pagamentoSelecionado = document.querySelector('input[name="payment"]:checked').value;
-  const trocoValor = document.getElementById("troco-valor").value;
+  const trocoValor = parseFloat(document.getElementById("troco-valor").value);
+  const totalPedido = parseFloat(document.getElementById('total').textContent.replace('R$ ', ''));
 
-  // Cria um objeto FormData para enviar os dados do pedido
+//Nova função validar o pedido
+  if (pagamentoSelecionado === 'dinheiro' && trocoValor < totalPedido) {
+    const cardElement = document.querySelector('#modal-finalizar .card');
+
+    // Verifica se a mensagem de erro já existe
+    if (cardElement.querySelector('.error-message')) {
+      return;
+    }
+
+    cardElement.classList.add("modal-error");
+
+    const errorMessage = document.createElement('p');
+    errorMessage.classList.add('error-message');
+    errorMessage.textContent = 'O valor do Troco é menor que o total do pedido.';
+    cardElement.appendChild(errorMessage);
+
+    return;
+  }
+
   const formData = new FormData();
   formData.append('tipo_pagamento', pagamentoSelecionado);
   formData.append('troco', trocoValor);
 
-  // Envia uma requisição POST para o endpoint '/finalizar_compra' com os dados do pedido
   fetch('/finalizar_compra', {
     method: 'POST',
     body: formData
   })
   .then(response => response.json())
   .then(data => {
-    console.log(data); // Exibe a resposta do backend (Flask) no console
 
-    // Aqui você pode implementar a lógica para lidar com a resposta do backend, por exemplo, exibir uma mensagem de sucesso ao usuário
-
-    // Atualiza a página para refletir os pedidos finalizados
-    location.reload();
+    exibirMensagemSucesso();
+    setTimeout(() => {
+      location.reload();
+    }, 1000); // Recarrega a página após 1 segundo
   })
   .catch(error => {
     console.error('Erro ao finalizar pedido:', error);
   });
+}
+
+function exibirMensagemSucesso() {
+  const modalSuccess = document.getElementById('modal-success');
+  modalSuccess.style.display = 'block';
+
+  setTimeout(() => {
+    modalSuccess.style.display = 'none';
+  }, 1000); // Remove a mensagem após 1 segundo
 }

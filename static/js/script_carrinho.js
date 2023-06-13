@@ -29,7 +29,6 @@ function deletePedido(pedidoId) {
 document.addEventListener("DOMContentLoaded", function () {
   // Função para atualizar o total
   function updateTotal() {
-    // Obtém todos os elementos com a classe 'cat_product_subtotal'
     const subtotals = document.querySelectorAll('.cat_product_subtotal p');
 
     // Inicializa o total como zero
