@@ -3,10 +3,12 @@ import csv
 
 class pizza():
     def __init__(self, id):
-
         with open('banco/produtoPizzas.csv', 'r') as file:
             reader = csv.reader(file)
             for row in reader:
+                if not row:
+                    continue
+
                 if id == row[0]:
                     self.id = row[0]
                     self.name = row[1]

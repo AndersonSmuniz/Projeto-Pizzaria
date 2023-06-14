@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_relatorio.css') }}" />
     <title>Administrativo</title>
 </head>
 <body>
@@ -28,7 +29,7 @@
             <a class="nav-link dropdown" >Administrativo</a>
             <div class="dropdown_content adm">
               <a class="dropdown-item" href="/administrativo/produtos">Produtos</a>
-              <a class="dropdown-item" href="/adminstrativo/usuario">Usuários</a>
+              <a class="dropdown-item" href="/relatorio-vendas">Relatório</a>
             </div>
           </li>
           {% endif %}
@@ -48,8 +49,40 @@
       </ul>
     </nav>
   </header>
-  <img src="https://th.bing.com/th/id/R.9ce7009c9d0a8efd3351c142b859ba0e?rik=D0PrPMWcO3kYfA&riu=http%3a%2f%2fwww.multportaseacabamentos.com.br%2fmanutencao.jpg&ehk=6ZPImjAQxLo4A8%2fX4EWwaWhwnbHd51TyIyxnQBHteRQ%3d&risl=&pid=ImgRaw&r=0"
-  style="width: 60%;">
+    <h1>Relatório de Vendas</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>User ID</th>
+                <th>Item</th>
+                <th>Quantidade</th>
+                <th>Observação</th>
+                <th>Especificação</th>
+                <th>Status</th>
+                <th>Tipo Pagamento</th>
+                <th>Troco</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venda in relatorio_data %}
+                <tr>
+                    <td>{{ venda.product_id }}</td>
+                    <td>{{ venda.user_id }}</td>
+                    <td>{{ venda.item }}</td>
+                    <td>{{ venda.amount }}</td>
+                    <td>{{ venda.observation }}</td>
+                    <td>{{ venda.specification }}</td>
+                    <td>{{ venda.status }}</td>
+                    <td>{{ venda.tipo_pagamento }}</td>
+                    <td>{{ venda.troco }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <script src="{{url_for('static', filename='js/script_header.js')}}"></script>
+    <script src="{{url_for('static', filename='js/script_relatorio.js')}}"></script>
 </body>
 </html>

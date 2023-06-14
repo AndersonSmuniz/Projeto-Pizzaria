@@ -239,7 +239,7 @@ def update_add_product():
         for product in products:
             if product['id'] == id:
                 product['name'] = name
-                product['price'] = '[{"P": '+price_p+',"M": '+price_m+', "G": '+price_g+'}]'
+                product['price'] = '[{"P": ' + price_p + ',"M": ' + price_m + ', "G": ' + price_g + '}]'
                 product['description'] = description
                 product['image'] = image
                 product['item'] = 'pizza'
@@ -248,14 +248,19 @@ def update_add_product():
 
         if not product_found:
             new_id = len(products) + 1
-            new_product = {'id': new_id, 'name': name, 'price': '[{"P": '+price_p+',"M": '+price_m+', "G": '+price_g+'}]',
+            new_product = {'id': new_id, 'name': name,
+                           'price': '[{"P": ' + price_p + ',"M": ' + price_m + ', "G": ' + price_g + '}]',
                            'description': description, 'image': image, 'item': 'pizza'}
             products.append(new_product)
 
         file.seek(0)
         writer = csv.DictWriter(file, fieldnames=reader.fieldnames)
         writer.writeheader()
-        writer.writerows(products)
+
+        # Filtra as linhas vazias antes de escrever
+        non_empty_products = [product for product in products if any(product.values())]
+        writer.writerows(non_empty_products)
+
     return jsonify({'success': True})
 
 
@@ -280,14 +285,20 @@ def delete_product():
     return jsonify({'success': True})
 
 
-@app.route('/adminstrativo/usuario', methods=['GET', 'POST'])
-def admin_us():
+@app.route('/relatorio-vendas')
+def adm_relatorio():
     if 'id' in session and session['id'] == '1':
         type = logged.User(session['id'])
-        return render_template('admin_users.html', type=type.type)
+        relatorio_data = []
+
+        with open('banco/relatorio.csv', 'r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                relatorio_data.append(row)
+
+        return render_template('relatorio.html', type=type.type, relatorio_data=relatorio_data)
     else:
         return redirect(url_for('login'))
-
 
 @app.route('/logout')
 def logout():
@@ -299,6 +310,30 @@ def logout():
 def perfil():
     if 'id' in session:
         info = logged.User(session['id'])
+        if request.method == 'POST':
+
+            username = request.form['username']
+            password = request.form['password']
+            address = request.form['address']
+
+            with open('banco/users.csv', 'r', encoding='utf-8') as file:
+                reader = csv.reader(file)
+                users = list(reader)
+                attUsers = []
+                for user in users:
+                    if user[0] != session['id']:
+                        attUsers.append(user)
+                    else:
+                        user[1] = username
+                        user[2] = password
+                        user[4] = address
+                        attUsers.append(user)
+            with open('banco/users.csv', 'w', newline='', encoding='utf-8') as file:
+                writer = csv.writer(file)
+                writer.writerows(users)
+
+            return redirect(url_for('perfil'))
+
         return render_template('profile.html', type=info.type, info=info)
     else:
         return redirect(url_for('login'))

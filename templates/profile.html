@@ -17,46 +17,72 @@
   <title>Perfil</title>
 </head>
 <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&family=Wix+Madefor+Display:wght@500&display=swap");
 
-        .profile-container {
-            max-width: 600px;
-            margin: 40px auto;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
+body {
+    font-family: "Baloo Bhaina 2", Tahoma, Geneva, Verdana, sans-serif;
+}
+.profile-container {
+    position: relative;
+    top: 5rem;
+    display: flex;
+    max-width: 402px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #5b5b5b;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .profile-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.profile-container h1 {
+  text-align: center;
+  color: #FFF;
+}
 
-        .profile-header h1 {
-            color: #333;
-        }
+.profile-details {
+  margin-top: 20px;
+}
 
-        .profile-details {
-            margin-bottom: 20px;
-        }
+.profile-details p {
+  margin-bottom: 10px;
+  color: #FFF;
+}
 
-        .profile-details p {
-            margin: 5px 0;
-            color: #555;
-        }
+.profile-details label {
+  font-weight: bold;
+}
 
-        .profile-details label {
-            font-weight: bold;
-        }
-    </style>
-<body>
-  <header>
+.profile-details input[type="text"],
+.profile-details input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+}
+
+.profile-details button[type="submit"] {
+  display: block;
+  width: 50%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #fff;
+  color: #F68D2E;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.profile-details button[type="submit"]:hover {
+  background-color: #F68D3E;
+  color: #fff;
+}
+
+</style>
+    <body>
+      <header>
     <nav class="navbar">
       <img class="navbar_imglogo" src="{{ url_for('static', filename='image/La bella Pizzaria.png') }}" alt="logo" />
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -78,7 +104,7 @@
             <a class="nav-link dropdown" >Administrativo</a>
             <div class="dropdown_content adm">
               <a class="dropdown-item" href="/administrativo/produtos">Produtos</a>
-              <a class="dropdown-item" href="/adminstrativo/usuario">Usuários</a>
+              <a class="dropdown-item" href="/relatorio-vendas">Relatório</a>
             </div>
           </li>
           {% endif %}
@@ -98,20 +124,15 @@
       </ul>
     </nav>
   </header>
-    <div class="profile-container">
-        <div class="profile-header">
-            <h1>Perfil</h1>
+        <div class="profile-container">
+                <h1>Perfil</h1>
+            <form class="profile-details" action="/perfil" method="post">
+                <p><label for="username">Nome:</label> <input type="text" id="username" name="username" value="{{ info.username }}"></p>
+                <p><label for="password">Senha:</label> <input type="password" id="password" name="password" value="{{ info.password }}"></p>
+                <p><label for="address">Endereço:</label> <input type="text" id="address" name="address" value="{{ info.address }}"></p>
+                <button type="submit">Salvar</button>
+            </form>
         </div>
-
-        <div class="profile-details">
-            <p><label>ID:</label> {{ info.id }}</p>
-            <p><label>Nome:</label> {{ info.username }}</p>
-            <p><label>Tipo:</label> {{ info.type }}</p>
-            <p><label>Endereço:</label> {{ info.address }}</p>
-        </div>
-
-    </div>
-
-  <script src="{{ url_for('static', filename='js/script_header.js') }}"></script>
-</body>
+        <script src="{{ url_for('static', filename='js/script_header.js') }}"></script>
+    </body>
 </html>

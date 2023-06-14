@@ -1,7 +1,7 @@
 var productContainer = document.querySelector('.product-list');
 
-// Criação dos elementos HTML para cada produto
-backendProducts.forEach(product => {
+// Função para criar os elementos HTML de cada produto
+function createProductCard(product) {
   const productCard = document.createElement('div');
   productCard.classList.add('product-card');
 
@@ -62,8 +62,34 @@ backendProducts.forEach(product => {
   productActions.appendChild(editButton);
   productActions.appendChild(deleteButton);
 
-  productContainer.appendChild(productCard);
+  return productCard;
+}
+
+// Função para renderizar os produtos na lista
+function renderProducts(products) {
+  productContainer.innerHTML = '';
+  products.forEach(product => {
+    const productCard = createProductCard(product);
+    productContainer.appendChild(productCard);
+  });
+}
+
+// Função para filtrar os produtos pelo nome
+function filterProductsByName(searchTerm) {
+  const filteredProducts = backendProducts.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  renderProducts(filteredProducts);
+}
+
+// Event listener para o campo de busca
+document.querySelector('.search input').addEventListener('input', function (event) {
+  const searchTerm = event.target.value;
+  filterProductsByName(searchTerm);
 });
+
+// Renderiza todos os produtos inicialmente
+renderProducts(backendProducts);
 
 // Função para adicionar um novo produto
 function addProduct() {

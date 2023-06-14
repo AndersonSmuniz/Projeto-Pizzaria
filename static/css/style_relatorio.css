@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&family=Wix+Madefor+Display:wght@500&display=swap");
+
+table {
+   display: initial;
+   border-collapse: collapse;
+   margin-bottom: 20px;
+   padding-left: 5rem;
+}
+
+th, td {
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+h1 {
+  color: #ff9800;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+body {
+  font-family: "Baloo Bhaina 2", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+.selected-row {
+  background-color: #d37807;
+  color: #fff;
+}

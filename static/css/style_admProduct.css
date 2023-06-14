@@ -52,17 +52,17 @@ h1 {
 }
 
 .search input {
-  padding: 5px;
-  border-radius: 4px;
+  padding: 4.5px;
+  border-radius: 0px 4px 4px 0px;
   border: none;
 }
 
-.search-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin-left: 5px;
-  color: #fff;
+.ico{
+ border-radius: 4px 0 0 4px;
+ color: gray;
+ background-color: #fff;
+ padding: 10px;
+
 }
 
 main {
@@ -202,4 +202,8 @@ main {
 }
 .modal-buttons .cancel-btn:hover {
   background-color: rgba(62, 62, 62, 1);
+}
+
+.invisible {
+  display: none;
 }
